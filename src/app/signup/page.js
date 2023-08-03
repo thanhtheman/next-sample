@@ -1,15 +1,26 @@
 "use client"
 import Link from "next/link";
 import { useRouter } from "next/navigation"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { axios } from "axios"
 
 
 export default function SignUp () {
+    const router = useRouter();
     const [user, setUser ] = useState({email: "", password: "", username:""})
+    const [buttonDisabled, setButtonDisabled] = useState(false);
+
+    useEffect(() => {
+        if (user.email.length > 0 && user.username.length > 0 && user.password.length > 0) {
+            setButtonDisabled(false)
+        } else {
+            setButtonDisabled(true)
+        }
+    }, [user])
     const onSignup = () => {
 
     }
+
 
     return (
         <div className="flex flex-col justify-center items-center min-h-screen py-2">
